@@ -1,0 +1,33 @@
+---
+title: modern.IEの使い方が変わった
+author: Naoto Kondou
+date: 2015/01/06
+thumb:
+category: code
+tags: modern.IE, 仮想マシン
+featured: true
+---
+
+
+IEのテスト仮想マシンをダウンロードできる[modern.IE](https://www.modern.ie/ja-jp)。僕はMacを使用しているので、IEをチェックする際には欠かせないツールです。
+
+以前までのmodern.IEだと、サイト内でコピーできる`curl -O “https://az412801`で始まるコマンドを入力すると、◯◯.sfxと◯◯.rarをいうファイルを入手できて以下のコマンドでovaファイルが出来上がった。
+
+```
+chmod +x ./IE8.XP.For.MacVirtualBox.part1.sfx
+./IE8.XP.For.MacVirtualBox.part1.sfx
+```
+
+なんだか使い方が変わったようで、`curl -O “https://az412801`で始まるコマンドで入手できるファイルが、◯◯.zip.001や◯◯.zip.002に変わっていた。このファイルは上記のコマンドでは、ovaファイルを作成することはできない。どうしたもんかと困っていたけど、ちゃんとサイトに使い方が書いてあった。(英語なのでスルーしていた。。)
+
+まず、以下のコマンドでzipファイルをまとめる。
+
+```
+cat ./*.zip > combined.zip
+```
+
+ombined.zipというファイルが出来上がっているので、解凍するとovaファイルが入手できる。
+`curl -O “https://az412801`で始まるコマンドじゃなくて、「Download Zip Archive」というリンクをクリックするとコマンドラインを使わずにovaファイルをダウンロードできるようです。(時間がかかる)
+
+![](150106/modern01.png)
+

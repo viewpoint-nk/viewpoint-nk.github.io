@@ -1,0 +1,42 @@
+<%= partial "header" %>
+
+    <div id="container">
+      <h1 class="site-title"><a href="/">viewpoint</a></h1>
+      <div class="l-sentence">
+        <h2 class="title"><%= current_page.data.title %></h2>
+        <%= yield %>
+      </div>
+
+      <div class="l-calender">
+        <h2 class="h2">Archive</h2>
+        <ul>
+          <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+            <li>
+              <h5><%= year %></h5>
+              <ul>
+                <% articles.each do |article| %>
+                  <li><a href="<%= article.url %>"><%= article.title %></a></li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div><!-- l-calender -->
+
+      <!--
+      <ul>
+        <% blog.tags.each do |tag, articles| %>
+          <li>
+            <h5><%= tag %></h5>
+            <ul>
+              <% articles.each do |article| %>
+                <li><a href="<%= article.url %>"><%= article.title %></a></li>
+              <% end %>
+            </ul>
+        <% end %>
+      </ul>
+       -->
+    </div><!-- container -->
+
+
+<%= partial "footer" %>
