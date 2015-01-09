@@ -43,8 +43,13 @@ ul
   line-height: 2
 
 table
-  width: 100%
   background: #F5F5F5
+  line-height: 1.5
+  width: 100%
+  word-wrap: break-word
+
+  +media($width)
+    table-layout: fixed
 
 th
   border-bottom: solid 1px #b7b7b7
