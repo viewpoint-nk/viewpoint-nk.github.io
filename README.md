@@ -1,1 +1,2 @@
-# viewpoint-nk.github.io
+blog
+====
