@@ -3,8 +3,8 @@ title: Alfredの便利なWorkflow
 author: Naoto Kondou
 date: 2015/01/07
 thumb:
-category: code
-tags: Alfred
+category: alfred
+tags: alfred, mac, app
 featured: true
 ---
 

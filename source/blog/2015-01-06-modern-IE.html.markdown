@@ -3,8 +3,8 @@ title: modern.IEの使い方が変わった
 author: Naoto Kondou
 date: 2015/01/06
 thumb:
-category: code
-tags: modern.IE, 仮想マシン
+category: tips
+tags: modern.ie, 仮想マシン
 featured: true
 ---
 

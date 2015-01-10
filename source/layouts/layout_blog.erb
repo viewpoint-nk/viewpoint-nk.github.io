@@ -8,7 +8,7 @@
           <ul class="l-tags">
             <i class="fa fa-tag"></i>
             <% current_page.data.tags.split(", ").each do |tag, articles| %>
-              <li><a href="/tags/<%= tag %>.html"><%= tag %></a></li>
+              <li><a href="/blog/tags/<%= tag %>.html"><%= tag %></a></li>
             <% end %>
           </ul>
         </div><!-- title-area -->
@@ -40,7 +40,7 @@
               <h5><%= year %></h5>
               <ul>
                 <% articles.each do |article| %>
-                  <li><a href="/blog<%= article.url %>"><%= article.title %></a></li>
+                  <li><a href="<%= article.url %>"><%= article.title %></a></li>
                 <% end %>
               </ul>
             </li>

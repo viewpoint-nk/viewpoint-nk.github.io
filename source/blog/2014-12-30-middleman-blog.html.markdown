@@ -3,8 +3,8 @@ title: Middlemanを使ってブログを作る
 author: Naoto Kondou
 date: 2014/12/30
 thumb:
-category: code
-tags: middleman, Ruby
+category: middleman
+tags: middleman, ruby
 featured: true
 ---
 

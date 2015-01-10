@@ -1,15 +1,16 @@
 ---
-title: jasmineでjavascriptテストを書く
+title: jasmineでjavascriptユニットテスト 導入と基礎
 author: Naoto Kondou
 date: 2015/01/09
 thumb:
-category: code
-tags: jasmin, javascript
+category: jasmine
+tags: jasmine, javascript
 featured: true
 ---
 
 [Jasmine](http://jasmine.github.io/)とはJS用のテストフレームワークです。
-Jasmineの他にもJasmineJavaScriptのテストフレームワークは色々な種類がありますが、認知度が高いのは以下のフレームワークでしょうか。
+Jasmineの他にもJ
+javascriptのテストフレームワークは色々な種類があります。認知度が高いのは以下のフレームワークでしょうか。
 
 - [QUnit](http://qunitjs.com/)
 - [Mocha](https://github.com/mochajs/mocha)
@@ -17,7 +18,7 @@ Jasmineの他にもJasmineJavaScriptのテストフレームワークは色々�
 
 上記のフレームワークと比べてもJasmineは人気の高いフレームワークです。
 現在案件でも使用しているので、Jasmineの導入から使い方までをおさらいしとこうと思う。
-実際のは、テストランナーやタスクランナーなどと組み合わせているけど、長くなりそうなので今回は基本のみ。
+実際は、テストランナーやタスクランナーなどと組み合わせているけど、長くなりそうなので今回は基本のみ。
 
 ## メリット
 - 品質を担保できる
@@ -35,7 +36,7 @@ Jasmineの他にもJasmineJavaScriptのテストフレームワークは色々�
 
 テストを導入するかどうかは、その案件で必要なのかどうかと工数を確保できるのかという部分が大きいと思う。
 
-## インストール
+## ダウンロード
 - [jasmine](https://github.com/jasmine/jasmine)
 
 まずは、Githubから必要なファイルをダウンロード。
@@ -76,7 +77,7 @@ describe('関数のテスト', function() {
 	- `toBe()`以外にも多数のメソッドがある
 
 ## テストHTMLの作成
-GitHubからダウンロードしたファイルで、必要なファイルはlibフォルダ内にある4つのファイル。
+GitHubからダウンロードしたファイルで、必要なファイルはlib/jasmine-coreフォルダ内にある4つのファイル。
 
 - jasmine.css
 - jasmine.js
