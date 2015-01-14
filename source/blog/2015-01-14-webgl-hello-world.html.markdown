@@ -11,8 +11,6 @@ featured: true
 最近WebGLの勉強をしているけど、なかなか難しい。簡単な図形を描画するだけでもコードはとても冗長になる。
 少しずつ慣れていくために、Hello Worldからおさらいする。
 
-## [Demo](http://viewpoint-nk.github.io/demo/webgl/01/)
-
 ## 描画領域のクリア
 WebGLにとってのHello Worldが描画領域のクリアでいいのかは分からないけど、取り敢えずそういうことにしておく。
 
@@ -69,7 +67,10 @@ function main(){
 ```
 
 これを実行すると500×500の真っ黒い四角形が描画されている。
-### [Demo](http://viewpoint-nk.github.io/demo/webgl/01/)
+##### _※表示されない場合は「RERUN」ボタンを押してみてください_
+
+<p data-height="400" data-theme-id="8514" data-slug-hash="NPpRer" data-default-tab="result" data-user="konweb" class='codepen'>See the Pen <a href='http://codepen.io/konweb/pen/NPpRer/'>NPpRer</a> by konweb (<a href='http://codepen.io/konweb'>@konweb</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 ## クリアする色の指定
 ### gl.clearColor(red, green, blue, alpha);

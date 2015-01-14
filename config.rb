@@ -87,12 +87,10 @@ activate :autoprefixer, browsers: ['last 2 versions', 'ie 9']
 # end
 
 set :sass_dir, 'sass'
-
 set :css_dir, 'stylesheets'
-
 set :js_dir, 'javascripts'
-
 set :images_dir, 'images'
+set :demo_dir, 'demo'
 
 # Build-specific configuration
 configure :build do
