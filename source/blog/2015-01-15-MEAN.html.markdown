@@ -1,0 +1,115 @@
+---
+title: 開発環境「MEAN」について
+author: Naoto Kondou
+date: 2015/01/15
+thumb:
+category: webgl
+tags: webgl, javascript
+featured: true
+---
+
+## LAMP
+開発環境といえば、**LAMP**が有名です。僕も前はPHPとMySQLでWeb開発をしていました。
+
+| 頭文字 | 意味 |
+|:-----------|:------------|
+| L | Linux |
+| A | Apache, Webサーバ |
+| M | MariaDB・MySQL ・MAMP|
+| P | PHP・Perl・Python |
+
+こういった構成はLAMP以外にもたくさんあります。
+こんなにあるなんて知らなかった。
+
+> - AMP
+	- LAMPからLinuxを除いたもの
+- LAPP
+	- LAMPのMySQLの代わりにPostgreSQLのもの
+- LASP
+	- LAMPのMySQLの代わりにSQLiteのもの
+- FLAP
+	- LAMPのMySQLの代わりにFirebirdのもの
+- WAMP
+	- LAMPのLinuxの代わりにMicrosoft Windowsのもの
+- MAMP
+	- LAMPのLinuxの代わりにMacintoshのもの
+	- mamp.infoから提供されているパッケージ
+- SAMP
+	- LAMPのLinuxの代わりにSolarisのもの
+- BAMP
+	- LAMPのLinuxの代わりにBSDのもの
+- LAMR
+	- LAMPのPerl、PHP､Pythonの代わりにRubyのもの
+- LATA
+	- LAMPのMySQLとPerl,PHP,Pythonの代わりにTextfileとAWKのもの[1]
+- LATS
+	- LAMPのMySQLとPerl,PHP,Pythonの代わりにTextfileとShellscriptのもの[2]
+
+[参照:wikipedia](http://ja.wikipedia.org/wiki/LAMP)
+
+## MEAN
+最近知った開発環境が**MEAN**です。
+MEANの頭文字をそれぞれ以下を表しています。
+
+| 頭文字 | 意味 |
+|:-----------|:------------|
+| M | MongoDB |
+| E | express |
+| A | AngularJS |
+| N | NodeJS |
+
+近年のWeb開発ではSPAのものが多く、ページ遷移なしでいろいろな情報が切り替わったりします。
+そういった運用の場合にMEANのような構成が適しているよということみたいです。
+
+NodeJSでバックエンドを動かし、AngularJSでフロント側をバインディングする。ような感じかな。
+AngularJSの部分は多分KnocKoutJSやBackboneJSでもいいんだと思う。
+
+## MEAN stack 環境を構築
+[mean.io](http://mean.io/#!/)という、MEANの構成を簡単に構築できるサイトがあります。
+
+### インストール
+以下のコマンドで`mean-cli`というのをインストールします。
+インストールしたらバージョンが表示されるか確認する。
+
+```
+sudo npm install -g mean-cli
+// バージョン確認
+mean -v
+```
+
+### 初期設定
+以下のコマンで初期設定を行う。
+
+```
+mean init yourNewApp
+```
+
+2つ質問される。
+
+- アプリケーション名どうしますか？
+- タスクランナーはGruntとGulpどっちにしますか？
+
+質問に答えるとcloneが始まり、アプリケーショ名で設定した名前のディレクトリにファイルがインストールされる。
+bower.jsonの中身を見てみると、jQuery、Angular、Bootstrapが記述されている。
+
+```json
+{
+  "name": "mean",
+  "dependencies": {
+    "jquery": "1.x",
+    "angular": "1.3.2",
+    "angular-resource": "1.3.2",
+    "angular-cookies": "1.3.2",
+    "angular-mocks": "1.3.2",
+    "angular-route": "1.3.2",
+    "bootstrap": "3.1.1",
+    "angular-bootstrap": "0.11.0",
+    "angular-ui-router": "#master"
+  }
+}
+```
+
+他にも、テストツールのKarmaやJasmineが入っているなど、開発に必要な物一式がインストールできる。
+詳しい使い方は[公式ドキュメント](http://learn.mean.io/)を参照する。
+
+今後、MEANのような構成でWeb制作することが増えるような気はする。
