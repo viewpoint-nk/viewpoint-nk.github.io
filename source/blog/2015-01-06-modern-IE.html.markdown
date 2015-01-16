@@ -14,8 +14,8 @@ IEのテスト仮想マシンをダウンロードできる[modern.IE](https://w
 以前までのmodern.IEだと、サイト内でコピーできる`curl -O “https://az412801`で始まるコマンドを入力すると、◯◯.sfxと◯◯.rarをいうファイルを入手できて以下のコマンドでovaファイルが出来上がった。
 
 ```
-chmod +x ./IE8.XP.For.MacVirtualBox.part1.sfx
-./IE8.XP.For.MacVirtualBox.part1.sfx
+$ chmod +x ./IE8.XP.For.MacVirtualBox.part1.sfx
+$ ./IE8.XP.For.MacVirtualBox.part1.sfx
 ```
 
 なんだか使い方が変わったようで、`curl -O “https://az412801`で始まるコマンドで入手できるファイルが、◯◯.zip.001や◯◯.zip.002に変わっていた。このファイルは上記のコマンドでは、ovaファイルを作成することはできない。どうしたもんかと困っていたけど、ちゃんとサイトに使い方が書いてあった。(英語なのでスルーしていた。。)
@@ -23,7 +23,7 @@ chmod +x ./IE8.XP.For.MacVirtualBox.part1.sfx
 まず、以下のコマンドでzipファイルをまとめる。
 
 ```
-cat ./*.zip > combined.zip
+$ cat ./*.zip > combined.zip
 ```
 
 ombined.zipというファイルが出来上がっているので、解凍するとovaファイルが入手できる。

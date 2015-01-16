@@ -15,20 +15,20 @@ MiddlemanはMarkDownで記事を書けるし、`middleman`コマンドでロー�
 
 ## まずはMiddlemanをインストール
 ```
-gem install middleman
+$ gem install middleman
 ```
 
 ## Blog機能の追加
 Gemfile内に以下を追加
 
 ```
-gem "middleman-blog"
+$ gem "middleman-blog"
 ```
 
 以下のコマンドを叩くと必要なものは一式インストールされる。あとは、お好きな様にレイアウトやデザインを整える。
 
 ```
-middleman init MY_BLOG_PROJECT --template=blog
+$ middleman init MY_BLOG_PROJECT --template=blog
 ```
 
 ## 記事の生成
@@ -50,7 +50,7 @@ Hello World
 記事の公開はGithubのgh-pagesブランチに必要なファイルだけをpushしたい。必要なファイルはbuildフォルダ内のファイル。これだけをgh-pagesにpushしたいんだけど、初めどうやったらいいのか分からず悶々としてましたが、以下のコマンドで必要なファイルだけをpushしてくれる。これは便利だ。
 
 ```
-middleman deploy
+$ middleman deploy
 ```
 
 config.rbに以下を追加する。

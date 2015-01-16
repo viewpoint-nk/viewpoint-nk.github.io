@@ -72,16 +72,16 @@ AngularJSの部分は多分KnocKoutJSやBackboneJSでもいいんだと思う。
 インストールしたらバージョンが表示されるか確認する。
 
 ```
-sudo npm install -g mean-cli
+$ sudo npm install -g mean-cli
 // バージョン確認
-mean -v
+$ mean -v
 ```
 
 ### 初期設定
 以下のコマンで初期設定を行う。
 
 ```
-mean init yourNewApp
+$ mean init yourNewApp
 ```
 
 2つ質問される。
