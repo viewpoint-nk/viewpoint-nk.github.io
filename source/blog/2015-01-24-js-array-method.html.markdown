@@ -141,3 +141,10 @@ var d = c.splice(1, 2, "びー", "しー");
 ```
 ## array.unshift(item)
 配列の先頭に要素を追加する。
+
+```
+var a = ["a", "b", "c"];
+var b = a.unshift("A", "B");
+// a → ["A", "B", "a", "b", "c"]
+// b → 5
+```
