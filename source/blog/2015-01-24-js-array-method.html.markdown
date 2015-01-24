@@ -11,6 +11,31 @@ featured: true
 [The Good Parts「良いパーツ」によるベストプラクティス](http://www.oreilly.co.jp/books/9784873113913/)を読んだので、
 忘れないようにArrayメソッドについてのまとめておく。
 
+
+## array.concat(item)
+自分自身と引数で渡された要素を連結し、新しい配列を返す。
+
+```
+var a = ["a", "b", "c"];
+var b = ["e", "f", "g"];
+var c = a.concat(b);
+// a → ["a", "b", "c"]
+// b → ["e", "f", "g"]
+// c → ["a", "b", "c", "e", "f", "g"]
+```
+
+## array.join(item)
+配列から文字列を生成する。
+引数には連結時の文字列を指定できる。
+
+```
+var a = ["a", "b", "c"];
+var b = a.join("");
+var c = a.join("-");
+// b → abc
+// c → a-b-c
+```
+
 ## array.pop()
 配列の最後から一つ削除する。
 配列がからだった場合、`undefined`を返す。
