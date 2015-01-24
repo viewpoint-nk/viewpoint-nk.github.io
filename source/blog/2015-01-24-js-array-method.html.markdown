@@ -15,7 +15,7 @@ featured: true
 ## array.concat(item)
 自分自身と引数で渡された要素を連結し、新しい配列を返す。
 
-```
+```js
 var a = ["a", "b", "c"];
 var b = ["e", "f", "g"];
 var c = a.concat(b);
@@ -28,7 +28,7 @@ var c = a.concat(b);
 配列から文字列を生成する。
 引数には連結時の文字列を指定できる。
 
-```
+```js
 var a = ["a", "b", "c"];
 var b = a.join("");
 var c = a.join("-");
