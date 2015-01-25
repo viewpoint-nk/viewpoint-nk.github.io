@@ -10,7 +10,7 @@ featured: true
 
 ![](150125/HTML5_01.png)
 
-HTML5 Conferenceに行ってきた。面白そうなセッションがたくさんありましたが、僕が聞いたセッションは以下。
+[HTML5 Conference](http://events.html5j.org/conference/2015/1/)に行ってきた。面白そうなセッションがたくさんありましたが、僕が聞いたセッションは以下。
 
 - プリンより滑らか。スムーズなアニメーションの作り方。
 - Web Componentsのアクセシビリティ
