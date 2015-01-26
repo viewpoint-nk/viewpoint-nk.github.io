@@ -39,7 +39,7 @@ https://github.com/DarbyBrown/sassmatic.git
 
 **style.scss**
 
-```
+```scss
 @import "compass";
 @import "sassmatic.scss";
 
