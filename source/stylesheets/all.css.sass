@@ -1,5 +1,7 @@
 @charset "utf-8"
 @import "syntax_highlight"
+@import "compass"
+@import "sassmatic.sass"
 
 $baseM: 15px
 $width: 800px
@@ -281,3 +283,25 @@ pre
   font-family: "Hammersmith One", sans-serif
   text-align: center
   padding: $baseM*3
+
+
+// - sample ======
+.img-filter
+  width: 600px
+  margin: 0 auto
+.img-filter01
+  @extend %filter-sanfran
+.img-filter02
+  @extend %filter-washout
+.img-filter03
+  @extend %filter-deadwood
+.img-filter04
+  @extend %filter-neptune
+.img-filter05
+  @extend %filter-warming
+.img-filter06
+  @extend %filter-casablanca
+.img-filter07
+  +filter-custom(sepia(100%)) // REQUIRED but doesn't have to have a value
+  +filter-color(#ffb400, 0.5)// Filter color and opacity
+  +filter-vignette(white, 70%, 90%, 3rem) // Color, start, stop and inset boxshadow
