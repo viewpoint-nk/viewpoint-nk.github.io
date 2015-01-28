@@ -106,7 +106,7 @@ https://github.com/DarbyBrown/sassmatic.git
 ![](150126/sample.jpeg)
  </div>
 
-なんだか余計な背景色がついてしまっていますね。これはdiv要素に画像と同じ幅を指定してあげればOKです。
+なんだか余計な背景色がついてしまいますね。これはdiv要素に画像と同じ幅を指定してあげればOKです。
 
 ```css
 .img-filter {
