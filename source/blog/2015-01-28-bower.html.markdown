@@ -1,0 +1,72 @@
+---
+title: bower入門
+author: Naoto Kondou
+date: 2015/01/28
+thumb:
+category: sass
+tags: sass, css
+featured: true
+---
+
+
+Bowerはパッケージ管理マネージャです。jQueryやらなんやらを簡単に管理することができます。
+ずっと存在を知ってはいたけど、全然使っていなかったので今更ながら触ってみます。
+
+## インストール
+インストールは、Node.jsの`npm`で行います。
+
+```
+npm install -g bower
+
+// バージョン確認
+bower -v
+```
+
+バージョンが確認できたらインストールはOK。
+
+
+## 使い方
+まずは、初期化です。
+
+```
+// sample用ディレクトリ作成
+mkdir bower-test
+
+// ディレクトリ移動
+cd bower-test
+
+// bower 初期化
+bower init
+```
+
+初期が終わると、`bower.json`というファイルが作成されます。このファイルは必要なライブラリーと依存関係を管理するファイルです。
+初期化がおわったので、試しにjQueryをインストールしてみます。
+
+```
+bower i jquery
+```
+
+`i`はinstallの略です。
+
+ディレクトリの中を見てみると、bower_components/jqueryというディレクトリが作成され、distフォルダ内に最新のjQueryがインストールされています。
+srcディレクトリも作成されてて余計なファイルがたくさんあるけど、これ除外できないのかなー。
+
+### バージョン指定
+バージョンを指定する場合は以下のようにします。
+
+```
+bower i jquery#1.9.1
+```
+
+先ほどのディレクトリ構造が書き換わって、bower_components/jquery内にv1.9.1のjQueryがインストールされます。
+
+### パッケージjsonに保存
+インストールする際に`--save-dev`を付けると、bower.jsonにライブラリー名とバージョン情報が保存されます。
+
+
+```
+bower i jquery --save-dev
+
+// 略
+bower i jquery --D
+```
