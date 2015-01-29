@@ -19,9 +19,29 @@
 		}
 	</style>
 </head>
-<body onload="main()">
+<body onload="main.init()">
 	<h1>描画領域をクリアする</h1>
 	<canvas id="webgl"></canvas>
-	<script src="HelloCanvas.js"></script>
+<!--
+	<script src="cuon-utils.js"></script>
+	<script src="webgl-utils.js"></script>
+	<script src="webgl-debug.js"></script>
+	 -->
+	<script src="main.js"></script>
+
+	<script type="x-shader/x-vartex" id="xs">
+		/* 頂点シェーダ */
+		void main(){
+			gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+			gl_PointSize = 10.0;
+		}
+	</script>
+
+	<script type="x-shader/x-fragment" id="fs">
+		/* フラグメントシェーダ */
+		void main(){
+			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		}
+	</script>
 </body>
 </html>
