@@ -161,3 +161,6 @@ DEPENDENCIES
   nokogiri
   redcarpet (~> 3.0.0)
   sass
+
+BUNDLED WITH
+   1.10.3

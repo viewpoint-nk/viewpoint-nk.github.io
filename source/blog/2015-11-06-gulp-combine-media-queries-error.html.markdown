@@ -38,14 +38,15 @@ TypeError: must start with number, buffer, array or string
     at emitOne (events.js:77:13)
 ```
 
-以下のissuesに上がっていた内容の通り、gulp-combine-media-queries/index.jsの152目を削除することでひとまずは解決できた。  
-[doesn't work with last version sass #19](https://github.com/konitter/gulp-combine-media-queries/issues/19)
+## 解決策
 
-この箇所がエラーになる。
+gulp-combine-media-queries/index.jsの152目の以下の箇所がエラーになるので、コメントアウトすればひとまずは解決できた。
 
 ```
 file.contents = new Buffer(cssJson);
 ```
 
-issuesに上がっているので、おそらくいずれ解決されるはず。。
+issuesに上がっているので、おそらくいずれ解決されるはず。。  
+[doesn't work with last version sass #19](https://github.com/konitter/gulp-combine-media-queries/issues/19)
+
 
