@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width; initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>WebGL初めの一歩「描画領域のクリア」</title>
+    <link rel="icon" type="image/icon" href="/images/favi.ico">
+		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata|Hammersmith+One|Marcellus+SC' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body class="blog blog_webgl blog_webgl_webgl-hello-world">
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=219576061530845&version=v2.0";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+    <div id="container">
+      <h1 class="site-title"><a href="/">viewpoint</a></h1>
+      <div class="l-sentence">
+        <div class="title-area">
+          <h2 class="title">WebGL初めの一歩「描画領域のクリア」</h2>
+          <p><i class="fa fa-clock-o"></i><span class="date-time">Jan 14 2015</span></p>
+          <ul class="l-tags">
+            <i class="fa fa-tag"></i>
+              <li><a href="/blog/tags/webgl.html">webgl</a></li>
+              <li><a href="/blog/tags/javascript.html">javascript</a></li>
+          </ul>
+        </div><!-- title-area -->
+        <p>最近WebGLの勉強をしているけど、なかなか難しい。簡単な図形を描画するだけでもコードはとても冗長になる。
+少しずつ慣れていくために、Hello Worldからおさらいする。</p>
+
+<h2>描画領域のクリア</h2>
+
+<p>WebGLにとってのHello Worldが描画領域のクリアでいいのかは分からないけど、取り敢えずそういうことにしておく。
+というかこれは初期化作業なので、毎回必要になる処理なんだと思う。</p>
+
+<h3>HTMLの作成</h3>
+
+<p>まずは、HTMLを作成する。
+<code>canvas</code>要素で描画領域を定義し、そこに描画していく。bodyにはonloadが指定され、読み込み完了時に<code>main()</code>関数が実行されるようになっている。</p>
+
+<p><strong>index.html</strong></p>
+<pre class="highlight html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>WebGL Demo<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">&quot;main()&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>描画領域をクリアする<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">&quot;webgl&quot;</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;HelloCanvas.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre>
+<h3>JSの作成</h3>
+
+<p>次にjavascriptプログラムを作成する。
+流れとしては以下。</p>
+
+<ul>
+<li>canvasを取得する</li>
+<li>canvasの領域を指定する</li>
+<li>WebGLコンテキストの取得</li>
+<li>クリアする色の指定</li>
+<li>canvasをクリア</li>
+</ul>
+
+<p><strong>HelloCanvas.js</strong></p>
+<pre class="highlight javascript"><span class="kd">function</span> <span class="nx">main</span><span class="p">(){</span>
+    <span class="c1">// canvasの取得と領域してい
+</span>    <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;webgl&quot;</span><span class="p">);</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+
+    <span class="c1">// WebGLコンテキストの取得
+</span>    <span class="kd">var</span> <span class="nx">gl</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;webgl&quot;</span><span class="p">);</span>
+
+    <span class="c1">// クリアする色の指定
+</span>    <span class="nx">gl</span><span class="p">.</span><span class="nx">clearColor</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+
+    <span class="c1">// canvasのクリア
+</span>    <span class="nx">gl</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">gl</span><span class="p">.</span><span class="nx">COLOR_BUFFER_BIT</span><span class="p">);</span>
+<span class="p">}</span>
+</pre>
+<p>これを実行すると500×500の真っ黒い四角形が描画されている。</p>
+
+<h5><em>※表示されない場合は「RERUN」ボタンを押してみてください</em></h5>
+
+<p data-height="400" data-theme-id="8514" data-slug-hash="NPpRer" data-default-tab="result" data-user="konweb" class='codepen'>See the Pen <a href='http://codepen.io/konweb/pen/NPpRer/'>NPpRer</a> by konweb (<a href='http://codepen.io/konweb'>@konweb</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2>クリアする色の指定</h2>
+
+<h3>gl.clearColor(red, green, blue, alpha);</h3>
+
+<table><thead>
+<tr>
+<th align="left">引数</th>
+<th align="left">意味</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">red</td>
+<td align="left">赤の強度（0.0 ~ 1.0）</td>
+</tr>
+<tr>
+<td align="left">green</td>
+<td align="left">緑の強度（0.0 ~ 1.0）</td>
+</tr>
+<tr>
+<td align="left">blue</td>
+<td align="left">青の強度（0.0 ~ 1.0）</td>
+</tr>
+<tr>
+<td align="left">alpha</td>
+<td align="left">透明度（アルファ値0.0 ~ 1.0）</td>
+</tr>
+</tbody></table>
+
+<h2>canvasをクリア</h2>
+
+<p>gl.clear()で指定されたバッファをクリア（塗りつぶす）。クリアする色は<code>gl.clearColor</code>で指定する。
+指定できる値はいくつかある。</p>
+
+<table><thead>
+<tr>
+<th align="left">引数</th>
+<th align="left">意味</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">gl.COLOR_BUFFER_BIT</td>
+<td align="left">カラーバッファ</td>
+</tr>
+<tr>
+<td align="left">gl.DEPTH_BUFFER_BIT</td>
+<td align="left">デプスバッファ</td>
+</tr>
+<tr>
+<td align="left">gl.STENCIL_BUFFER_BIT</td>
+<td align="left">ステンシルバッファ</td>
+</tr>
+</tbody></table>
+
+<h2>まとめ</h2>
+
+<p>WebGLのHello Worldは他の言語に比べて長い。ただ領域を真っ黒にするだけでも1,2行ではできない。
+単純な図形を描画するだけでもとても冗長なコードになってしまう。</p>
+
+<p><a href="https://www.opengl.org/documentation/glsl/">GLSL</a>(OpenGL Shading Language)という<a href="http://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E">シェーディング言語</a>も覚えなくてはならないし、学習コストは高いかもしれないが覚えたら楽しそうだ。</p>
+
+      </div>
+
+      <div class="l-share">
+        <div class="twitter">
+          <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        <div class="facebook">
+          <div id="facebook" class="fb-like" data-href="" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+        </div>
+        <div class="hatena">
+          <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </div>
+        <div class="pocket">
+          <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </div>
+      </div>
+
+      <div class="l-calender">
+        <h2 class="h2">Archive</h2>
+        <ul>
+            <li>
+              <h5>2015</h5>
+              <ul>
+                  <li><a href="/blog/tips/virtualbox-tips.html">VirtualBox Tips</a></li>
+                  <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+                  <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+                  <li><a href="/blog/tools/bower.html">bower入門</a></li>
+                  <li><a href="/blog/sass/sassmatic.html">Sassmaticで簡単に画像フィルターを実現</a></li>
+                  <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+                  <li><a href="/blog/javascript/js-array-method.html">javascript Arrayメソッドのまとめ</a></li>
+                  <li><a href="/blog/unix/say-command.html">sayコマンドで英語の発音を調べる</a></li>
+                  <li><a href="/blog/tips/MEAN.html">開発環境「MEAN」について</a></li>
+                  <li><a href="/blog/webgl/webgl-hello-world.html">WebGL初めの一歩「描画領域のクリア」</a></li>
+                  <li><a href="/blog/tips/rapid-reading.html">本を読む速度を上げる方法</a></li>
+                  <li><a href="/blog/middleman/middleman-article-tag.html">Middlemanで現在記事のタグを表示する</a></li>
+                  <li><a href="/blog/jasmine/jasmine-htmltesting.html">jasmineでHTMLを読み込んでのテスト</a></li>
+                  <li><a href="/blog/jasmine/jasmine-basic.html">jasmineでjavascriptユニットテスト 導入と基礎</a></li>
+                  <li><a href="/blog/sublimetext/sublimetext-inputSequence.html">Sublime Text 連番を振れるプラグイン「InputSequence」が便利</a></li>
+                  <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+                  <li><a href="/blog/tips/modern-IE.html">modern.IEの使い方が変わった</a></li>
+              </ul>
+            </li>
+            <li>
+              <h5>2014</h5>
+              <ul>
+                  <li><a href="/blog/middleman/middleman-blog.html">Middlemanを使ってブログを作る</a></li>
+              </ul>
+            </li>
+        </ul>
+      </div><!-- l-calender -->
+
+      <!--
+        <ul>
+          <li>
+            <h5>middleman</h5>
+            <ul>
+                <li><a href="/blog/middleman/middleman-article-tag.html">Middlemanで現在記事のタグを表示する</a></li>
+                <li><a href="/blog/middleman/middleman-blog.html">Middlemanを使ってブログを作る</a></li>
+            </ul>
+          <li>
+            <h5>ruby</h5>
+            <ul>
+                <li><a href="/blog/middleman/middleman-article-tag.html">Middlemanで現在記事のタグを表示する</a></li>
+                <li><a href="/blog/middleman/middleman-blog.html">Middlemanを使ってブログを作る</a></li>
+            </ul>
+          <li>
+            <h5>modern.ie</h5>
+            <ul>
+                <li><a href="/blog/tips/modern-IE.html">modern.IEの使い方が変わった</a></li>
+            </ul>
+          <li>
+            <h5>仮想マシン</h5>
+            <ul>
+                <li><a href="/blog/tips/modern-IE.html">modern.IEの使い方が変わった</a></li>
+            </ul>
+          <li>
+            <h5>alfred</h5>
+            <ul>
+                <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+            </ul>
+          <li>
+            <h5>mac</h5>
+            <ul>
+                <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+            </ul>
+          <li>
+            <h5>app</h5>
+            <ul>
+                <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+            </ul>
+          <li>
+            <h5>sublimetext</h5>
+            <ul>
+                <li><a href="/blog/sublimetext/sublimetext-inputSequence.html">Sublime Text 連番を振れるプラグイン「InputSequence」が便利</a></li>
+            </ul>
+          <li>
+            <h5>jasmine</h5>
+            <ul>
+                <li><a href="/blog/jasmine/jasmine-htmltesting.html">jasmineでHTMLを読み込んでのテスト</a></li>
+                <li><a href="/blog/jasmine/jasmine-basic.html">jasmineでjavascriptユニットテスト 導入と基礎</a></li>
+            </ul>
+          <li>
+            <h5>javascript</h5>
+            <ul>
+                <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+                <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+                <li><a href="/blog/tools/bower.html">bower入門</a></li>
+                <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+                <li><a href="/blog/javascript/js-array-method.html">javascript Arrayメソッドのまとめ</a></li>
+                <li><a href="/blog/webgl/webgl-hello-world.html">WebGL初めの一歩「描画領域のクリア」</a></li>
+                <li><a href="/blog/jasmine/jasmine-htmltesting.html">jasmineでHTMLを読み込んでのテスト</a></li>
+                <li><a href="/blog/jasmine/jasmine-basic.html">jasmineでjavascriptユニットテスト 導入と基礎</a></li>
+            </ul>
+          <li>
+            <h5>その他</h5>
+            <ul>
+                <li><a href="/blog/tips/MEAN.html">開発環境「MEAN」について</a></li>
+                <li><a href="/blog/tips/rapid-reading.html">本を読む速度を上げる方法</a></li>
+            </ul>
+          <li>
+            <h5>webgl</h5>
+            <ul>
+                <li><a href="/blog/webgl/webgl-hello-world.html">WebGL初めの一歩「描画領域のクリア」</a></li>
+            </ul>
+          <li>
+            <h5>開発環境</h5>
+            <ul>
+                <li><a href="/blog/tips/MEAN.html">開発環境「MEAN」について</a></li>
+            </ul>
+          <li>
+            <h5>ターミナル</h5>
+            <ul>
+                <li><a href="/blog/unix/say-command.html">sayコマンドで英語の発音を調べる</a></li>
+            </ul>
+          <li>
+            <h5>html5</h5>
+            <ul>
+                <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+            </ul>
+          <li>
+            <h5>event</h5>
+            <ul>
+                <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+            </ul>
+          <li>
+            <h5>sass</h5>
+            <ul>
+                <li><a href="/blog/sass/sassmatic.html">Sassmaticで簡単に画像フィルターを実現</a></li>
+            </ul>
+          <li>
+            <h5>css</h5>
+            <ul>
+                <li><a href="/blog/sass/sassmatic.html">Sassmaticで簡単に画像フィルターを実現</a></li>
+            </ul>
+          <li>
+            <h5>bower</h5>
+            <ul>
+                <li><a href="/blog/tools/bower.html">bower入門</a></li>
+            </ul>
+          <li>
+            <h5>node</h5>
+            <ul>
+                <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+                <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+                <li><a href="/blog/tools/bower.html">bower入門</a></li>
+            </ul>
+          <li>
+            <h5>milkcocoa</h5>
+            <ul>
+                <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+            </ul>
+          <li>
+            <h5>gulp</h5>
+            <ul>
+                <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+            </ul>
+          <li>
+            <h5>virtualbox</h5>
+            <ul>
+                <li><a href="/blog/tips/virtualbox-tips.html">VirtualBox Tips</a></li>
+            </ul>
+          <li>
+            <h5>tips</h5>
+            <ul>
+                <li><a href="/blog/tips/virtualbox-tips.html">VirtualBox Tips</a></li>
+            </ul>
+      </ul>
+      -->
+    </div><!-- container -->
+
+    <div class="footer">
+      <p>&copy; 2014- <a href="/">viewpoint</a> N.K All rights reserved</p>
+    </div>
+	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	  <script src="/javascripts/all.js" type="text/javascript"></script>
+  </body>
+</html>

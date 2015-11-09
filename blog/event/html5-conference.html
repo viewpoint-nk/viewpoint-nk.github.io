@@ -1,0 +1,575 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width; initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>HTML5 Conferenceに行ってきた</title>
+    <link rel="icon" type="image/icon" href="/images/favi.ico">
+		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata|Hammersmith+One|Marcellus+SC' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body class="blog blog_event blog_event_html5-conference">
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=219576061530845&version=v2.0";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+    <div id="container">
+      <h1 class="site-title"><a href="/">viewpoint</a></h1>
+      <div class="l-sentence">
+        <div class="title-area">
+          <h2 class="title">HTML5 Conferenceに行ってきた</h2>
+          <p><i class="fa fa-clock-o"></i><span class="date-time">Jan 25 2015</span></p>
+          <ul class="l-tags">
+            <i class="fa fa-tag"></i>
+              <li><a href="/blog/tags/html5.html">html5</a></li>
+              <li><a href="/blog/tags/javascript.html">javascript</a></li>
+              <li><a href="/blog/tags/event.html">event</a></li>
+          </ul>
+        </div><!-- title-area -->
+        <p><img src="/images/150125/HTML5_01.png" /></p>
+
+<p><a href="http://events.html5j.org/conference/2015/1/">HTML5 Conference</a>に行ってきた。面白そうなセッションがたくさんありましたが、僕が聞いたセッションは以下。</p>
+
+<ul>
+<li>プリンより滑らか。スムーズなアニメーションの作り方。</li>
+<li>Web Componentsのアクセシビリティ</li>
+<li>2015年これからの日本のWebサイトパフォーマンスについて</li>
+<li>【ハンズオン】やってみたら実は簡単！ WebGLで開ける新しい表現</li>
+</ul>
+
+<p>動画や資料は<a href="http://unsolublesugar.com/20150125/104819/#P2Mm58c.twitter_tweet_original_vertical">こちら</a>にまとめられています。</p>
+
+<h2>プリンより滑らか。スムーズなアニメーションの作り方。</h2>
+
+<p>ブライアン・バートルズ: Mozilla Japan</p>
+
+<ul>
+<li>アニメーションを使うと分かりやすくなる</li>
+<li>時間を通して情報を伝える
+
+<ul>
+<li>例えばMac OSだとウィンドウを最小化するとどこにウィンドウがいったか分かりやすい</li>
+</ul></li>
+</ul>
+
+<h3>ユーザーの目に届くまで何が行われているか</h3>
+
+<ul>
+<li>構文解析
+
+<ul>
+<li>DOMツリー</li>
+</ul></li>
+<li>スタイル決定
+
+<ul>
+<li>レイアウト決定</li>
+</ul></li>
+<li>描画</li>
+</ul>
+
+<h3>プロパティによってリフローが発生する</h3>
+
+<p>cssでアニメションさせる場合は、リフローを避ける。<br>
+marginを使うより、transformでアニメーションさせる。</p>
+
+<p>リフローはDeveloper toolsで確認できる。</p>
+
+<h3>svgを使う場合</h3>
+
+<p><code>iframe</code>や<code>object</code>で読み込むよりも<code>img</code>で読み込むようが速い。</p>
+
+<h3>will-changeでレイヤー化</h3>
+
+<p><code>will-change</code>を使うと前もってレイヤー化することができる。
+transform3d()よりもwill-changeのほうが良い。</p>
+
+<p><a href="https://dev.opera.com/articles/ja/css-will-change-property/">CSS will-changeプロパティについて知っておくべきこと</a></p>
+
+<h3>コンポジター</h3>
+
+<p>とても理想的なアニメーションだが、transformとopacityしか対応していない。
+ブラウザも限られる。</p>
+
+<h3>Web Animation API</h3>
+
+<p>現在はChromeにしか実装されていない。</p>
+
+<h3>まとめ</h3>
+
+<p>ブラウザの機能をしっかり把握して、リフローを発生させないことで滑らかなアニメーションを実装できる。</p>
+
+<hr>
+
+<h2>Web Componentsのアクセシビリティ</h2>
+
+<p>黒澤 剛志: 株式会社ミツエーリンクス</p>
+
+<h3>Webアクセシビリティとは</h3>
+
+<p>特定の環境に依存せずに見れる。<br>
+多様なデバイスに対応する。</p>
+
+<ul>
+<li>タッチスクリーン</li>
+<li>キーボードがないデバイス</li>
+<li>キーボードしかないデバイス</li>
+<li>音声入出力</li>
+<li>電子ペーパー</li>
+</ul>
+
+<h3>Webアクセシビリティの3つのポイント</h3>
+
+<ul>
+<li>セマンティクス</li>
+<li>様々なデバイス・環境でのインタラクション</li>
+<li>代替コンテンツ</li>
+</ul>
+
+<p>マシンがセマンティクスを理解。ユーザーの環境に合わせて情報・機能を提供。</p>
+
+<h3>Web Componentsとは</h3>
+
+<p>ページの構成要素をコンポーネント化にする。コンポーネントを組み合わせてページを構成。</p>
+
+<h3>Web Componentsとアクセシビリティ</h3>
+
+<ul>
+<li>コンポーネント
+
+<ul>
+<li>機能や意味を切り出し</li>
+<li>コンポーネントのアクセシビリティが高ければ、一定のアクセシビリティを確保できる。</li>
+</ul></li>
+</ul>
+
+<p>コンポーネントのアクセシビリティを高めることが重要。<br>
+<strong>アクセシビリティの基本は同じ。</strong></p>
+
+<p>例:<br>
+プログレスバーであれば、音で作業率が分かる。<br>
+WAI-ARIAでセマンティクスを伝える。</p>
+
+<ul>
+<li>ロール
+
+<ul>
+<li>progressbar</li>
+</ul></li>
+<li>プロパティ
+
+<ul>
+<li>aria-valuemin: 最小値</li>
+<li>aria-valuemax: 最大値</li>
+<li>aria-valuenow: 現在地</li>
+</ul></li>
+</ul>
+
+<h3>Custom Elements</h3>
+
+<ul>
+<li>既存要素の拡張
+
+<ul>
+<li>既存要素のセマンティクスを継承</li>
+</ul></li>
+<li>独自要素の拡張
+
+<ul>
+<li>Shadow DOM</li>
+</ul></li>
+</ul>
+
+<h3>Shadow DOM</h3>
+
+<p>もともとのツリーとShadow DOMのツリーが合成されたものがページに表示される。</p>
+
+<p>Shadow DOMでセマンティクスを指定するならば、適切なHTML要素を利用する。<br>
+適切なHTML要素が使えない場合、<a href="http://www.hitachi.co.jp/universaldesign/ria/ajax/wai-aria/index.html">WAI-ARIA</a>を利用する。</p>
+
+<h3>まとめ</h3>
+
+<p>コンポーネント単位でアクセシビリティを確保しやすくなる可能を持っている。<br>
+アクセシビリティの品質を維持・管理できる可能がある。<br>
+本質的にはWeb componentsを使わない場合と同じ。</p>
+
+<hr>
+
+<h2>2015年これからの日本のWebサイトパフォーマンスについて</h2>
+
+<ul>
+<li>竹洞 陽一郎</li>
+<li>川田 寛: NTTコムウェア株式会社</li>
+<li>Meco Meco</li>
+<li>堀 裕司</li>
+<li>山﨑 真吾</li>
+</ul>
+
+<p><a href="http://www.slideshare.net/takehora/html5-conference-43867874">HTML5 CONFERENCE パフォーマンス部パネルディスカッション 「2015年これからの日本のWebサイトパフォーマンスについて」</a></p>
+
+<p>遅いと分かってからパフォーマンス改善すると、とても工数が掛かってしまい非効率。初めからパフォーマンスを意識して制作したほうが良い。</p>
+
+<h3>日本のWebパフォーマンスの現状</h3>
+
+<p>アメリカは1秒ほどでサイトが表示されるが、日本のサイトは7秒とかかかっている。
+いろいろパフォーマンス改善できるツール(圧縮や結合など)が登場しているが、受託の場合運用などの問題で活用できていない。</p>
+
+<h3>パフォーマンス管理</h3>
+
+<p>パフォーマンスの計測は最低でも1週間はとる。<br>
+時間帯も気にする。昼よりも夜のほうがアクセスが集中するため、<strong>昼だけでなく夜のパフォーマンスも確認する。</strong></p>
+
+<h3>今の高速化手法</h3>
+
+<p>ビジネスアプローチと技術的アプローチの双方が必要。</p>
+
+<ul>
+<li>イメージファイルの最適化</li>
+<li>javascriptとCSSの最適化
+
+<ul>
+<li>concat + uglify</li>
+</ul></li>
+<li>ネットワークの最適化
+
+<ul>
+<li>HTTPリクエストを減らす</li>
+<li>CSSスプライト</li>
+</ul></li>
+<li>マルチバイトとWebフォント
+
+<ul>
+<li>日本語の場合は重いので微妙</li>
+</ul></li>
+<li>レイアウトのデザイン
+
+<ul>
+<li>アメリカでは画像が減ってきている</li>
+</ul></li>
+<li>モバイル向けWeb</li>
+<li>アニメーション</li>
+</ul>
+
+<h3>まとめ</h3>
+
+<p>とにかく通信料を減らすことがパフォーマンスに繋がる。<br>
+CSSスプライトもやりすぎない。適度にファイルを分割する。<br>
+画像を減らせるか、本当に必要な機能なのかをクライアントと話し合う。<br>
+<strong>PCは1MB、モバイルは100KB</strong></p>
+
+<hr>
+
+<h2>【ハンズオン】やってみたら実は簡単！ WebGLで開ける新しい表現</h2>
+
+<ul>
+<li>小山田 晃浩: 株式会社ピクセルグリッド</li>
+<li>比留間 和也: 面白法人カヤック</li>
+<li>杉本 雅広</li>
+<li>原田 直貴: 株式会社Gaji-Labo</li>
+<li>執行 大介</li>
+</ul>
+
+<p><a href="https://speakerdeck.com/yomotsu/webgl-plus-3d-models-by-using-three-dot-js-blender-exporter">WebGL + 3D models by using Three.js Blender Exporter</a></p>
+
+<h3>THREE.JSハンズオン</h3>
+
+<p>映画では要なものをTHREE.JSで考える。</p>
+
+<ul>
+<li>役者 → オブジェクト</li>
+<li>カメラ → カメラ</li>
+<li>ライト → ライト</li>
+<li>シーン → シーン</li>
+<li>再生機 → 再生機</li>
+</ul>
+
+<h3>初期設定</h3>
+<pre class="highlight javascript"><span class="c1">// レンダラーを生成
+</span><span class="kd">var</span> <span class="nx">renderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">WebGLRenderer</span><span class="p">();</span>
+<span class="nx">renderer</span><span class="p">.</span><span class="nx">setClearColor</span><span class="p">(</span><span class="mh">0x000000</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="nx">renderer</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span><span class="p">);</span>
+</pre>
+<h3>カメラの生成</h3>
+<pre class="highlight javascript"><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">PerspectiveCamera</span><span class="p">(</span><span class="err">角度</span><span class="p">,</span> <span class="err">アスペクト比</span><span class="p">,</span> <span class="err">手前</span><span class="p">,</span> <span class="err">奥行き</span><span class="p">)</span>
+<span class="nx">camera</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="nx">camera</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">z</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
+</pre>
+<h3>ライトの設定</h3>
+<pre class="highlight javascript"><span class="c1">// 平行光源
+</span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">DirectionalLight</span><span class="p">(</span><span class="mh">0xffffff</span><span class="p">);</span>
+</pre>
+<h3>シーンの生成</h3>
+<pre class="highlight javascript"><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Scene</span><span class="p">();</span>
+</pre>
+<h3>オブジェクトの生成</h3>
+<pre class="highlight javascript"><span class="c1">// 形
+</span><span class="kd">var</span> <span class="nx">planeGeometry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">PlaneBufferGeometry</span><span class="p">(</span><span class="err">縦横</span><span class="p">,</span> <span class="err">分割数</span><span class="p">.....);</span>
+
+<span class="c1">// 材質
+</span><span class="kd">var</span> <span class="nx">planeMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">({</span>
+  <span class="na">color</span><span class="p">:</span> <span class="mh">0xdddddd</span>
+<span class="p">});</span>
+
+<span class="c1">// 生成
+</span><span class="kd">var</span> <span class="nx">plane</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">planeGeometry</span><span class="p">,</span> <span class="nx">planeMaterial</span><span class="p">);</span>
+
+<span class="nx">plane</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span>    <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span>
+<span class="nx">plane</span><span class="p">.</span><span class="nx">rotation</span><span class="p">.</span><span class="nx">x</span>    <span class="o">=</span> <span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</pre>
+<h3>キューブの生成</h3>
+<pre class="highlight javascript"><span class="c1">// 形
+</span><span class="kd">var</span> <span class="nx">boxGeometry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">BoxGeometry</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+<span class="c1">// 材質
+</span><span class="kd">var</span> <span class="nx">boxMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">({</span>
+  <span class="na">color</span><span class="p">:</span> <span class="nx">cubeColor</span>
+<span class="p">});</span>
+
+<span class="c1">// 生成
+</span><span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span><span class="nx">boxGeometry</span><span class="p">,</span> <span class="nx">boxMaterial</span><span class="p">);</span>
+</pre>
+<h3>シーンに追加</h3>
+<pre class="highlight javascript"><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">plane</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">cube</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">light</span><span class="p">);</span>
+</pre>
+<h3>カメラの向き</h3>
+<pre class="highlight javascript"><span class="nx">camera</span><span class="p">.</span><span class="nx">lookAt</span><span class="p">(</span><span class="nx">cube</span><span class="p">.</span><span class="nx">position</span><span class="p">);</span>
+</pre>
+<h2>アニメーション</h2>
+<pre class="highlight javascript"><span class="p">(</span><span class="kd">function</span> <span class="nx">animate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">animate</span><span class="p">);</span>
+
+  <span class="nx">cube</span><span class="p">.</span><span class="nx">rotation</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>
+  <span class="nx">cube</span><span class="p">.</span><span class="nx">rotation</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="mf">0.005</span><span class="p">;</span>
+
+  <span class="nx">render</span><span class="p">();</span>
+<span class="p">}());</span>
+</pre>
+<h3>THREE.JSとBlender</h3>
+
+<p>3Dモデルを作成したことがなくても、以外と緩いライセンスで色々な3Dモデルデータが配布されている。</p>
+
+<p>3DモデルデータをWebGL用にコンパイルするためには、exporterを使う。</p>
+
+<h3>BlenderでTHREE.JSを使えるようにする</h3>
+
+<p>THREE.JSのAddonをBlender内のAddonにコピーします。<br>
+THREE.JSのAddonは、<code>three.js/utils/exporters/blender</code>にあります。(io mesh threejsのような名前)</p>
+
+<p>BlenderのAddonは<code>アプリケーション/Blender.app/Contents/Resources/2.73/scripts/addons</code>にあるので、THREE.JSのAddonをコピーします。</p>
+
+<p>次にBlenderを開いて<code>file/user Preferences</code>を開く。<br>
+Addonタブ内のfilderで<code>three</code>で検索する。<br>
+three.js formatg表示されるので、チェックを入れてSave User Settingsで保存する。これでBlenderでTHREE.JSが有効化される。</p>
+
+      </div>
+
+      <div class="l-share">
+        <div class="twitter">
+          <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        <div class="facebook">
+          <div id="facebook" class="fb-like" data-href="" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+        </div>
+        <div class="hatena">
+          <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </div>
+        <div class="pocket">
+          <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </div>
+      </div>
+
+      <div class="l-calender">
+        <h2 class="h2">Archive</h2>
+        <ul>
+            <li>
+              <h5>2015</h5>
+              <ul>
+                  <li><a href="/blog/tips/virtualbox-tips.html">VirtualBox Tips</a></li>
+                  <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+                  <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+                  <li><a href="/blog/tools/bower.html">bower入門</a></li>
+                  <li><a href="/blog/sass/sassmatic.html">Sassmaticで簡単に画像フィルターを実現</a></li>
+                  <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+                  <li><a href="/blog/javascript/js-array-method.html">javascript Arrayメソッドのまとめ</a></li>
+                  <li><a href="/blog/unix/say-command.html">sayコマンドで英語の発音を調べる</a></li>
+                  <li><a href="/blog/tips/MEAN.html">開発環境「MEAN」について</a></li>
+                  <li><a href="/blog/webgl/webgl-hello-world.html">WebGL初めの一歩「描画領域のクリア」</a></li>
+                  <li><a href="/blog/tips/rapid-reading.html">本を読む速度を上げる方法</a></li>
+                  <li><a href="/blog/middleman/middleman-article-tag.html">Middlemanで現在記事のタグを表示する</a></li>
+                  <li><a href="/blog/jasmine/jasmine-htmltesting.html">jasmineでHTMLを読み込んでのテスト</a></li>
+                  <li><a href="/blog/jasmine/jasmine-basic.html">jasmineでjavascriptユニットテスト 導入と基礎</a></li>
+                  <li><a href="/blog/sublimetext/sublimetext-inputSequence.html">Sublime Text 連番を振れるプラグイン「InputSequence」が便利</a></li>
+                  <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+                  <li><a href="/blog/tips/modern-IE.html">modern.IEの使い方が変わった</a></li>
+              </ul>
+            </li>
+            <li>
+              <h5>2014</h5>
+              <ul>
+                  <li><a href="/blog/middleman/middleman-blog.html">Middlemanを使ってブログを作る</a></li>
+              </ul>
+            </li>
+        </ul>
+      </div><!-- l-calender -->
+
+      <!--
+        <ul>
+          <li>
+            <h5>middleman</h5>
+            <ul>
+                <li><a href="/blog/middleman/middleman-article-tag.html">Middlemanで現在記事のタグを表示する</a></li>
+                <li><a href="/blog/middleman/middleman-blog.html">Middlemanを使ってブログを作る</a></li>
+            </ul>
+          <li>
+            <h5>ruby</h5>
+            <ul>
+                <li><a href="/blog/middleman/middleman-article-tag.html">Middlemanで現在記事のタグを表示する</a></li>
+                <li><a href="/blog/middleman/middleman-blog.html">Middlemanを使ってブログを作る</a></li>
+            </ul>
+          <li>
+            <h5>modern.ie</h5>
+            <ul>
+                <li><a href="/blog/tips/modern-IE.html">modern.IEの使い方が変わった</a></li>
+            </ul>
+          <li>
+            <h5>仮想マシン</h5>
+            <ul>
+                <li><a href="/blog/tips/modern-IE.html">modern.IEの使い方が変わった</a></li>
+            </ul>
+          <li>
+            <h5>alfred</h5>
+            <ul>
+                <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+            </ul>
+          <li>
+            <h5>mac</h5>
+            <ul>
+                <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+            </ul>
+          <li>
+            <h5>app</h5>
+            <ul>
+                <li><a href="/blog/alfred/alfred-workflow.html">Alfredの便利なWorkflow</a></li>
+            </ul>
+          <li>
+            <h5>sublimetext</h5>
+            <ul>
+                <li><a href="/blog/sublimetext/sublimetext-inputSequence.html">Sublime Text 連番を振れるプラグイン「InputSequence」が便利</a></li>
+            </ul>
+          <li>
+            <h5>jasmine</h5>
+            <ul>
+                <li><a href="/blog/jasmine/jasmine-htmltesting.html">jasmineでHTMLを読み込んでのテスト</a></li>
+                <li><a href="/blog/jasmine/jasmine-basic.html">jasmineでjavascriptユニットテスト 導入と基礎</a></li>
+            </ul>
+          <li>
+            <h5>javascript</h5>
+            <ul>
+                <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+                <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+                <li><a href="/blog/tools/bower.html">bower入門</a></li>
+                <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+                <li><a href="/blog/javascript/js-array-method.html">javascript Arrayメソッドのまとめ</a></li>
+                <li><a href="/blog/webgl/webgl-hello-world.html">WebGL初めの一歩「描画領域のクリア」</a></li>
+                <li><a href="/blog/jasmine/jasmine-htmltesting.html">jasmineでHTMLを読み込んでのテスト</a></li>
+                <li><a href="/blog/jasmine/jasmine-basic.html">jasmineでjavascriptユニットテスト 導入と基礎</a></li>
+            </ul>
+          <li>
+            <h5>その他</h5>
+            <ul>
+                <li><a href="/blog/tips/MEAN.html">開発環境「MEAN」について</a></li>
+                <li><a href="/blog/tips/rapid-reading.html">本を読む速度を上げる方法</a></li>
+            </ul>
+          <li>
+            <h5>webgl</h5>
+            <ul>
+                <li><a href="/blog/webgl/webgl-hello-world.html">WebGL初めの一歩「描画領域のクリア」</a></li>
+            </ul>
+          <li>
+            <h5>開発環境</h5>
+            <ul>
+                <li><a href="/blog/tips/MEAN.html">開発環境「MEAN」について</a></li>
+            </ul>
+          <li>
+            <h5>ターミナル</h5>
+            <ul>
+                <li><a href="/blog/unix/say-command.html">sayコマンドで英語の発音を調べる</a></li>
+            </ul>
+          <li>
+            <h5>html5</h5>
+            <ul>
+                <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+            </ul>
+          <li>
+            <h5>event</h5>
+            <ul>
+                <li><a href="/blog/event/html5-conference.html">HTML5 Conferenceに行ってきた</a></li>
+            </ul>
+          <li>
+            <h5>sass</h5>
+            <ul>
+                <li><a href="/blog/sass/sassmatic.html">Sassmaticで簡単に画像フィルターを実現</a></li>
+            </ul>
+          <li>
+            <h5>css</h5>
+            <ul>
+                <li><a href="/blog/sass/sassmatic.html">Sassmaticで簡単に画像フィルターを実現</a></li>
+            </ul>
+          <li>
+            <h5>bower</h5>
+            <ul>
+                <li><a href="/blog/tools/bower.html">bower入門</a></li>
+            </ul>
+          <li>
+            <h5>node</h5>
+            <ul>
+                <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+                <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+                <li><a href="/blog/tools/bower.html">bower入門</a></li>
+            </ul>
+          <li>
+            <h5>milkcocoa</h5>
+            <ul>
+                <li><a href="/blog/javascript/milkcocoa.html">milkcocoaで簡単リアルタイム通信</a></li>
+            </ul>
+          <li>
+            <h5>gulp</h5>
+            <ul>
+                <li><a href="/blog/javascript/gulp-combine-media-queries-error.html">gulp-combine-media-queriesがこける</a></li>
+            </ul>
+          <li>
+            <h5>virtualbox</h5>
+            <ul>
+                <li><a href="/blog/tips/virtualbox-tips.html">VirtualBox Tips</a></li>
+            </ul>
+          <li>
+            <h5>tips</h5>
+            <ul>
+                <li><a href="/blog/tips/virtualbox-tips.html">VirtualBox Tips</a></li>
+            </ul>
+      </ul>
+      -->
+    </div><!-- container -->
+
+    <div class="footer">
+      <p>&copy; 2014- <a href="/">viewpoint</a> N.K All rights reserved</p>
+    </div>
+	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	  <script src="/javascripts/all.js" type="text/javascript"></script>
+  </body>
+</html>

@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/blog</id>
+  <link href="http://blog.url.com/blog"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2015-11-10T00:00:00+09:00</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>VirtualBox Tips</title>
+    <link rel="alternate" href="http://blog.url.com/blog/tips/virtualbox-tips.html"/>
+    <id>http://blog.url.com/blog/tips/virtualbox-tips.html</id>
+    <published>2015-11-10T00:00:00+09:00</published>
+    <updated>2015-11-10T01:37:12+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;MacからVirtualBoxを使ってIEやWindowsを使用する際のTipsまとめ。  &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;クリップボード共有&lt;/li&gt;
+&lt;li&gt;共有フォルダ&lt;/li&gt;
+&lt;li&gt;ショートカットキーの変更&lt;/li&gt;
+&lt;li&gt;IE8のフォント&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;クリップボード共有&lt;/h2&gt;
+
+&lt;p&gt;MacとWindows間でクリップボードを共有できる。共有できないとけっこうきつい。&lt;br&gt;
+設定はとても簡単で、VirtualBoxを起動し、一般を選択。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss01.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;高度タブの「クリップボードの共有」を双方向に設定し再起動するとクリップボードを共有できる。&lt;br&gt;
+ついでに「ドラッグ＆ドロップ」も双方向にしておくと便利かもしれない。ほとんど使ったことはない。。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss02.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;共有されない場合&lt;/h3&gt;
+
+&lt;p&gt;上記の設定を行っているのも関わらず、クリップボードが共有できない場合がある。&lt;br&gt;
+そのような場合はGuest Additionsをインストールする必要があるようです。&lt;br&gt;
+詳しくは以下がとても参考になります。&lt;br&gt;
+&lt;a href="http://vboxmania.net/content/guest-additions%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"&gt;Guest Additionsのインストール&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ゲストOSを起動し、上ナビから「Devices」&amp;gt;「Install Guest Additions CD Image&amp;hellip;」をクリックします。&lt;br&gt;
+すると自動的にCDイメージ内にメディアがマウントされますので、ダブルクリックしGuest Additionsインストールします。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss03.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;インストールが完了したら、ゲストOSを再起動するとクリップボードの共有ができるようになっているはずです。&lt;br&gt;
+僕の場合はこれで解決できました。&lt;/p&gt;
+
+&lt;h2&gt;共有フォルダ&lt;/h2&gt;
+
+&lt;p&gt;ゲストとホスト間でフォルダを共有することができます。&lt;br&gt;
+VirtualBoxを起動し、一般を選択。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss01.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;「共有フォルダ」タブを選択し、右端にあるフォルダアイコンをクリックします。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss08.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;ポップアップが表示されるので、下矢印アイコンをクリックしその他を選択すると、好きなフォルダを指定することができます。&lt;br&gt;
+フォルダを選択したら、OKをクリックして設定完了です。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss09.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;設定が完了したら、ゲスト側のフォルダパスに&lt;code&gt;\\vboxsvr&lt;/code&gt;と入力すると共有したフォルダにアクセスすることができます。  &lt;/p&gt;
+
+&lt;h2&gt;ショートカットキーの変更&lt;/h2&gt;
+
+&lt;p&gt;MacからWindowsにコピペする場合は、「Cmd+c」でコピーし「Ctrl+v」でペーストしなくてなりません。&lt;br&gt;
+WindowsからMacの場合はその反対のです。&lt;br&gt;
+これだとけっこう使いづらいので、Windowsのショートカットキーを変更してあげましょう。&lt;/p&gt;
+
+&lt;h3&gt;ホストキーの変更&lt;/h3&gt;
+
+&lt;p&gt;まず、ホストキーを変更します。&lt;br&gt;
+ホストキーはゲストOS側からホスト側を操作することができる特殊なキーです。&lt;br&gt;
+初期設定では、ホストキーが&lt;strong&gt;左コマンドキー&lt;/strong&gt;になっているので、これを&lt;strong&gt;右コマンドキー&lt;/strong&gt;に変更してあげましょう。(好きなところでOKです。)  &lt;/p&gt;
+
+&lt;p&gt;VirtualBoxの環境設定 &amp;gt; 入力と進み「仮想マシン」タブを選択します。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss04.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;「ホストキーの組み合わせ」のショートカット欄をクリックし、右コマンドキーを入力し、OKをクリックします。&lt;br&gt;
+これでホストキーの変更ができました。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss05.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;ショートカットキーの変更&lt;/h3&gt;
+
+&lt;p&gt;ショートカットキーの変更には、「KeySwap」というソフトを使用します。&lt;br&gt;
+ゲストOS側でKeySwapを検索しダウンロードします。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss06.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;解答しKeySwapを&lt;strong&gt;管理者として実行&lt;/strong&gt;で起動します。(なんかWindows8.1でlzhが解答できなかったのでLhasaというフリーソフトを使いました。&lt;br&gt;
+「キー名」に変更したいキーを入力し、「変換キー名」に変換後のキーを入力し終了をクリックします。&lt;br&gt;
+これでMac側と同じようにコピペすることができます。快適です。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/151110/ss07.png" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;IE8のフォント&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://www.modern.ie/"&gt;modern.IE&lt;/a&gt;からIE8をインストールしサイトを表示すると、ゴシック系のフォントが入っておらず日本語がおかしな表示になってしまいます。&lt;br&gt;
+そこで、Macから適当に&lt;strong&gt;MS Pゴシック&lt;/strong&gt;あたりを共有フォルダにコピーし、ゲスト側のフォントフォルダに入れてあげます。&lt;br&gt;
+Macのフォントは&lt;strong&gt;/Library/Fonts&lt;/strong&gt;フォルダ内にあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\\vboxsvr&lt;/code&gt;で共有フォルダーにアクセスし、フォントをコピーします。&lt;br&gt;
+次に&lt;code&gt;c:\Windows\Fonts&lt;/code&gt;にアクセスし、コピーしたフォントをペーストします。&lt;br&gt;
+これで再起動すると無事に日本語が表示されます。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>gulp-combine-media-queriesがこける</title>
+    <link rel="alternate" href="http://blog.url.com/blog/javascript/gulp-combine-media-queries-error.html"/>
+    <id>http://blog.url.com/blog/javascript/gulp-combine-media-queries-error.html</id>
+    <published>2015-11-06T00:00:00+09:00</published>
+    <updated>2015-11-07T12:14:31+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;sassのコンパイル時にどうにもgulp-combine-media-queriesがエラーを起こしてしまって、けっこうハマってしまった。&lt;/p&gt;
+
+&lt;h2&gt;環境&lt;/h2&gt;
+
+&lt;p&gt;node: v4.2.2&lt;br&gt;
+npm: 2.14.7&lt;br&gt;
+gulp: CLI version 3.9.0&lt;br&gt;
+gulp: Local version 3.9.0&lt;br&gt;
+gulp-combine-media-queries: 3.1.0&lt;/p&gt;
+
+&lt;h2&gt;エラー内容&lt;/h2&gt;
+
+&lt;p&gt;内容は以下のような感じ。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;buffer.js:167
+  throw new TypeError(&amp;#39;must start with number, buffer, array or string&amp;#39;);
+  ^
+
+TypeError: must start with number, buffer, array or string
+    at fromObject (buffer.js:167:9)
+    at new Buffer (buffer.js:58:10)
+    at Transform.transform [as _transform] (/Users/hogehoge/node_modules/gulp-combine-media-queries/index.js:152:21)
+    at Transform._read (/Users/hogehoge/node_modules/gulp-combine-media-queries/node_modules/through2/node_modules/readable-stream/lib/_stream_transform.js:184:10)
+    at Transform._write (/Users/hogehoge/node_modules/gulp-combine-media-queries/node_modules/through2/node_modules/readable-stream/lib/_stream_transform.js:172:12)
+    at doWrite (/Users/hogehoge/node_modules/gulp-combine-media-queries/node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js:237:10)
+    at writeOrBuffer (/Users/hogehoge/node_modules/gulp-combine-media-queries/node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js:227:5)
+    at Transform.Writable.write (/Users/hogehoge/node_modules/gulp-combine-media-queries/node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js:194:11)
+    at DestroyableTransform.ondata (/Users/hogehoge/node_modules/gulp-autoprefixer/node_modules/through2/node_modules/readable-stream/lib/_stream_readable.js:581:20)
+    at emitOne (events.js:77:13)
+&lt;/pre&gt;
+&lt;h2&gt;解決策&lt;/h2&gt;
+
+&lt;p&gt;gulp-combine-media-queries/index.jsの152目の以下の箇所がエラーになるので、コメントアウトすればひとまずは解決できた。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;file.contents = new Buffer(cssJson);
+&lt;/pre&gt;
+&lt;p&gt;issuesに上がっているので、おそらくいずれ解決されるはず。。&lt;br&gt;
+&lt;a href="https://github.com/konitter/gulp-combine-media-queries/issues/19"&gt;doesn&amp;rsquo;t work with last version sass #19&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>milkcocoaで簡単リアルタイム通信</title>
+    <link rel="alternate" href="http://blog.url.com/blog/javascript/milkcocoa.html"/>
+    <id>http://blog.url.com/blog/javascript/milkcocoa.html</id>
+    <published>2015-02-03T00:00:00+09:00</published>
+    <updated>2015-11-07T12:14:31+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/150203/milkcocoa.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;「JavaScript１行でバックエンドを提供します」というキャッチコピーの&lt;a href="https://mlkcca.com/"&gt;milkcocoa&lt;/a&gt;。milkcocoaを使うととても簡単にバックエンドの機能を実装できるので、チャットなどは一瞬で作成できます。&lt;/p&gt;
+
+&lt;h2&gt;使い方&lt;/h2&gt;
+
+&lt;p&gt;使い方は&lt;a href="https://mlkcca.com/tutorial/page1.html"&gt;チュートリアル&lt;/a&gt;を見たら誰でも分かると思う。
+APIの方も&lt;a href="https://mlkcca.com/document/api-js.html"&gt;リファレンス&lt;/a&gt;を見れば、すぐに理解できる。&lt;/p&gt;
+
+&lt;p&gt;以下のようなチャットなら本当に5分くらいで作成できる。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/150203/sample.gif" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;感想&lt;/h2&gt;
+
+&lt;p&gt;なんかsoket.IOの接続がいまいち安定しなかったのが気になるけど、milkcocoaを使えばリアルタイム通信がめちゃ楽になるので色々使えそう。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>bower入門</title>
+    <link rel="alternate" href="http://blog.url.com/blog/tools/bower.html"/>
+    <id>http://blog.url.com/blog/tools/bower.html</id>
+    <published>2015-01-28T00:00:00+09:00</published>
+    <updated>2015-11-07T12:14:31+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Bowerはパッケージ管理マネージャです。jQueryやらなんやらを簡単に管理することができます。
+ずっと存在を知ってはいたけど、全然使っていなかったので今更ながら触ってみます。&lt;/p&gt;
+
+&lt;h2&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;インストールは、Node.jsの&lt;code&gt;npm&lt;/code&gt;で行います。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;$ npm install -g bower
+
+// バージョン確認
+$ bower -v
+&lt;/pre&gt;
+&lt;p&gt;バージョンが確認できたらインストールはOK。&lt;/p&gt;
+
+&lt;h2&gt;使い方&lt;/h2&gt;
+
+&lt;p&gt;まずは、初期化です。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;// sample用ディレクトリ作成
+$ mkdir bower-test
+
+// ディレクトリ移動
+$ cd bower-test
+
+// bower 初期化
+$ bower init
+&lt;/pre&gt;
+&lt;p&gt;初期が終わると、&lt;code&gt;bower.json&lt;/code&gt;というファイルが作成されます。このファイルは必要なライブラリーと依存関係を管理するファイルです。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;bower.json&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sample&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;version&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;authors&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mb_kondou &amp;lt;kondou@maboroshi.biz&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;description&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sample&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;MIT&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ignore&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;node_modules&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bower_components&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;初期化がおわったので、試しにjQueryをインストールしてみます。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;$ bower i jquery
+&lt;/pre&gt;
+&lt;p&gt;「&lt;strong&gt;i&lt;/strong&gt;」はinstallの略です。&lt;/p&gt;
+
+&lt;p&gt;ディレクトリの中を見てみると、bower_components/jqueryというディレクトリが作成され、distフォルダ内に最新のjQueryがインストールされています。
+srcディレクトリも作成されてて余計なファイルがたくさんあるけど、これ除外できないのかなー。&lt;/p&gt;
+
+&lt;h3&gt;バージョン指定&lt;/h3&gt;
+
+&lt;p&gt;バージョンを指定する場合は以下のようにします。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;$ bower i jquery#1.9.1
+&lt;/pre&gt;
+&lt;p&gt;先ほどのディレクトリ構造が書き換わって、bower_components/jquery内にv1.9.1のjQueryがインストールされます。&lt;/p&gt;
+
+&lt;h3&gt;パッケージjsonに保存&lt;/h3&gt;
+
+&lt;p&gt;インストールする際に&lt;code&gt;--save-dev&lt;/code&gt;を付けると、bower.jsonにライブラリー名とバージョン情報が保存されます。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;$ bower i jquery --save-dev
+
+// 略
+$ bower i jquery --D
+&lt;/pre&gt;
+&lt;p&gt;これでbower.jsonにライブラリの情報が追記され、次回から&lt;code&gt;bower i&lt;/code&gt;をすると、記述されているライブラリーをインストールできる。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;bower.json&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sample&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;version&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;authors&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mb_kondou &amp;lt;kondou@maboroshi.biz&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;description&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sample&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;MIT&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ignore&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;**/.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;node_modules&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bower_components&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;devDependencies&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jquery&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;~2.1.3&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/pre&gt;
+&lt;h2&gt;bowerrc&lt;/h2&gt;
+
+&lt;p&gt;bowerrcはbowerの設定ファイルです。&lt;strong&gt;.bowerrc&lt;/strong&gt;という名前で保存し、中にjson形式で設定を記述します。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;.bowerrc&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;directory&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;app/components/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;analytics&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;timeout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;120000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;registry&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;search&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://bower.herokuapp.com&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;directory&lt;/strong&gt;でライブラリーを配置するディレクトリを選択できます。
+他の設定については、&lt;a href="http://bower.io/docs/config/"&gt;公式サイト&lt;/a&gt;を参照。&lt;/p&gt;
+
+&lt;h2&gt;bowerコマンド&lt;/h2&gt;
+
+&lt;h3&gt;インストール&lt;/h3&gt;
+&lt;pre class="highlight text"&gt;$ bower install [package_name]
+$ bower i [package_name]
+
+// bowerに未登録のパッケージ
+$ bower install http://ライブラリのURL
+
+// dependencies(本番)に追加
+$ bower install [package_name] --save
+
+// devDependencies(開発時)に追加
+$ bower install [package_name] --save-dev
+$ bower install [package_name] -D
+
+&lt;/pre&gt;
+&lt;h3&gt;アンインストール&lt;/h3&gt;
+&lt;pre class="highlight text"&gt;$ bower uninstall [package_name]
+
+// dependencies(本番)から削除
+$ bower uninstall [package_name] --save
+
+// devDependencies(開発時)から削除
+$ bower uninstall [package_name] --save-dev
+$ bower uninstall [package_name] --D
+&lt;/pre&gt;
+&lt;h3&gt;アップデート&lt;/h3&gt;
+&lt;pre class="highlight text"&gt;// まとめて
+$ bower update
+
+// 特定パッケージを上書き
+$ bower [package_name] install
+&lt;/pre&gt;
+&lt;h3&gt;その他&lt;/h3&gt;
+&lt;pre class="highlight text"&gt;// bower全パッケージを表示
+$ bower search
+
+// 特的キーワードのパッケージを表示
+$ bower search [key]
+
+// インストールしたパッケージを表示
+$ bower list
+
+// bowerのアップデート
+$ npm update -g bower
+&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Sassmaticで簡単に画像フィルターを実現</title>
+    <link rel="alternate" href="http://blog.url.com/blog/sass/sassmatic.html"/>
+    <id>http://blog.url.com/blog/sass/sassmatic.html</id>
+    <published>2015-01-26T00:00:00+09:00</published>
+    <updated>2015-11-07T12:14:31+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;CSSで画像を加工しようと思ったらけっこう大変です。そこで&lt;a href="http://sassmatic.com/?utm_content=bufferea092&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer"&gt;Sassmatic&lt;/a&gt;を使います。SassmaticはCSS3だけで画像に色々なフィルターを掛けることができるライブラリです。&lt;/p&gt;
+
+&lt;h2&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;GithubからSassmaticをダウンロードします。&lt;br&gt;
+必要なファイルは&lt;strong&gt;_sassmatic.scss&lt;/strong&gt;です。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;https://github.com/DarbyBrown/sassmatic.git
+&lt;/pre&gt;
+&lt;h2&gt;使い方&lt;/h2&gt;
+
+&lt;p&gt;使い方は簡単で、style.scssなどでcompassと&lt;strong&gt;_sassmatic.scss&lt;/strong&gt;とimportで読みこむだけです。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;index.html&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;html&lt;/span&gt; &lt;span class="na"&gt;lang=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;meta&lt;/span&gt; &lt;span class="na"&gt;charset=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;sassmatic&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;link&lt;/span&gt; &lt;span class="na"&gt;rel=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;css/style.css&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;img-filter01&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;img/sample.jpeg&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;alt=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;style.scss&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="highlight scss"&gt;&lt;span class="k"&gt;@import&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;compass&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;@import&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sassmatic.scss&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nc"&gt;.img-filter01&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-sanfran&lt;/span&gt;&lt;span class="p"&gt;;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;これでscssをコンパイルすると画像フィルターが完成です。&lt;/p&gt;
+
+&lt;p&gt;これが元画像。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/150126/sample.jpeg" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Sanfran&lt;/h2&gt;
+&lt;pre class="highlight sass"&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-sanfran&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter01"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Washout&lt;/h2&gt;
+&lt;pre class="highlight sass"&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-washout&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter02"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Deadwood&lt;/h2&gt;
+&lt;pre class="highlight sass"&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-deadwood&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter03"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Neptune&lt;/h2&gt;
+&lt;pre class="highlight sass"&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-neptune&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter04"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Warming&lt;/h2&gt;
+&lt;pre class="highlight sass"&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-warming&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter05"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2&gt;Casablanca&lt;/h2&gt;
+&lt;pre class="highlight sass"&gt;&lt;span class="k"&gt;@extend&lt;/span&gt; &lt;span class="nv"&gt;%filter-casablanca&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter06"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;なんだか余計な背景色がついてしまいますね。これはdiv要素に画像と同じ幅を指定してあげればOKです。&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;span class="nc"&gt;.img-filter&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;600px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="py"&gt;marign&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nb"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h2&gt;Custom Filter&lt;/h2&gt;
+
+&lt;p&gt;フィルターをカスタムすることもできます。&lt;/p&gt;
+&lt;pre class="highlight scss"&gt;&lt;span class="nc"&gt;.img-filter01&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;@include&lt;/span&gt; &lt;span class="nd"&gt;filter-custom&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sepia&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100%&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="k"&gt;@include&lt;/span&gt; &lt;span class="nd"&gt;filter-color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;#ffb400&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="mi"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;@include&lt;/span&gt; &lt;span class="nd"&gt;filter-vignette&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;white&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;70%&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;90%&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3rem&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;&lt;div class="img-filter img-filter07"&gt;
+&lt;img src="/images/150126/sample.jpeg" /&gt;
+ &lt;/div&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>HTML5 Conferenceに行ってきた</title>
+    <link rel="alternate" href="http://blog.url.com/blog/event/html5-conference.html"/>
+    <id>http://blog.url.com/blog/event/html5-conference.html</id>
+    <published>2015-01-25T00:00:00+09:00</published>
+    <updated>2015-11-07T12:14:31+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src="/images/150125/HTML5_01.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://events.html5j.org/conference/2015/1/"&gt;HTML5 Conference&lt;/a&gt;に行ってきた。面白そうなセッションがたくさんありましたが、僕が聞いたセッションは以下。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プリンより滑らか。スムーズなアニメーションの作り方。&lt;/li&gt;
+&lt;li&gt;Web Componentsのアクセシビリティ&lt;/li&gt;
+&lt;li&gt;2015年これからの日本のWebサイトパフォーマンスについて&lt;/li&gt;
+&lt;li&gt;【ハンズオン】やってみたら実は簡単！ WebGLで開ける新しい表現&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;動画や資料は&lt;a href="http://unsolublesugar.com/20150125/104819/#P2Mm58c.twitter_tweet_original_vertical"&gt;こちら&lt;/a&gt;にまとめられています。&lt;/p&gt;
+
+&lt;h2&gt;プリンより滑らか。スムーズなアニメーションの作り方。&lt;/h2&gt;
+
+&lt;p&gt;ブライアン・バートルズ: Mozilla Japan&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アニメーションを使うと分かりやすくなる&lt;/li&gt;
+&lt;li&gt;時間を通して情報を伝える
+
+&lt;ul&gt;
+&lt;li&gt;例えばMac OSだとウィンドウを最小化するとどこにウィンドウがいったか分かりやすい&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;ユーザーの目に届くまで何が行われているか&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;構文解析
+
+&lt;ul&gt;
+&lt;li&gt;DOMツリー&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;スタイル決定
+
+&lt;ul&gt;
+&lt;li&gt;レイアウト決定&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;描画&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;プロパティによってリフローが発生する&lt;/h3&gt;
+
+&lt;p&gt;cssでアニメションさせる場合は、リフローを避ける。&lt;br&gt;
+marginを使うより、transformでアニメーションさせる。&lt;/p&gt;
+
+&lt;p&gt;リフローはDeveloper toolsで確認できる。&lt;/p&gt;
+
+&lt;h3&gt;svgを使う場合&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;iframe&lt;/code&gt;や&lt;code&gt;object&lt;/code&gt;で読み込むよりも&lt;code&gt;img&lt;/code&gt;で読み込むようが速い。&lt;/p&gt;
+
+&lt;h3&gt;will-changeでレイヤー化&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;will-change&lt;/code&gt;を使うと前もってレイヤー化することができる。
+transform3d()よりもwill-changeのほうが良い。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://dev.opera.com/articles/ja/css-will-change-property/"&gt;CSS will-changeプロパティについて知っておくべきこと&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;コンポジター&lt;/h3&gt;
+
+&lt;p&gt;とても理想的なアニメーションだが、transformとopacityしか対応していない。
+ブラウザも限られる。&lt;/p&gt;
+
+&lt;h3&gt;Web Animation API&lt;/h3&gt;
+
+&lt;p&gt;現在はChromeにしか実装されていない。&lt;/p&gt;
+
+&lt;h3&gt;まとめ&lt;/h3&gt;
+
+&lt;p&gt;ブラウザの機能をしっかり把握して、リフローを発生させないことで滑らかなアニメーションを実装できる。&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;Web Componentsのアクセシビリティ&lt;/h2&gt;
+
+&lt;p&gt;黒澤 剛志: 株式会社ミツエーリンクス&lt;/p&gt;
+
+&lt;h3&gt;Webアクセシビリティとは&lt;/h3&gt;
+
+&lt;p&gt;特定の環境に依存せずに見れる。&lt;br&gt;
+多様なデバイスに対応する。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;タッチスクリーン&lt;/li&gt;
+&lt;li&gt;キーボードがないデバイス&lt;/li&gt;
+&lt;li&gt;キーボードしかないデバイス&lt;/li&gt;
+&lt;li&gt;音声入出力&lt;/li&gt;
+&lt;li&gt;電子ペーパー&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Webアクセシビリティの3つのポイント&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;セマンティクス&lt;/li&gt;
+&lt;li&gt;様々なデバイス・環境でのインタラクション&lt;/li&gt;
+&lt;li&gt;代替コンテンツ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;マシンがセマンティクスを理解。ユーザーの環境に合わせて情報・機能を提供。&lt;/p&gt;
+
+&lt;h3&gt;Web Componentsとは&lt;/h3&gt;
+
+&lt;p&gt;ページの構成要素をコンポーネント化にする。コンポーネントを組み合わせてページを構成。&lt;/p&gt;
+
+&lt;h3&gt;Web Componentsとアクセシビリティ&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;コンポーネント
+
+&lt;ul&gt;
+&lt;li&gt;機能や意味を切り出し&lt;/li&gt;
+&lt;li&gt;コンポーネントのアクセシビリティが高ければ、一定のアクセシビリティを確保できる。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;コンポーネントのアクセシビリティを高めることが重要。&lt;br&gt;
+&lt;strong&gt;アクセシビリティの基本は同じ。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;例:&lt;br&gt;
+プログレスバーであれば、音で作業率が分かる。&lt;br&gt;
+WAI-ARIAでセマンティクスを伝える。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ロール
+
+&lt;ul&gt;
+&lt;li&gt;progressbar&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;プロパティ
+
+&lt;ul&gt;
+&lt;li&gt;aria-valuemin: 最小値&lt;/li&gt;
+&lt;li&gt;aria-valuemax: 最大値&lt;/li&gt;
+&lt;li&gt;aria-valuenow: 現在地&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Custom Elements&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;既存要素の拡張
+
+&lt;ul&gt;
+&lt;li&gt;既存要素のセマンティクスを継承&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;独自要素の拡張
+
+&lt;ul&gt;
+&lt;li&gt;Shadow DOM&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Shadow DOM&lt;/h3&gt;
+
+&lt;p&gt;もともとのツリーとShadow DOMのツリーが合成されたものがページに表示される。&lt;/p&gt;
+
+&lt;p&gt;Shadow DOMでセマンティクスを指定するならば、適切なHTML要素を利用する。&lt;br&gt;
+適切なHTML要素が使えない場合、&lt;a href="http://www.hitachi.co.jp/universaldesign/ria/ajax/wai-aria/index.html"&gt;WAI-ARIA&lt;/a&gt;を利用する。&lt;/p&gt;
+
+&lt;h3&gt;まとめ&lt;/h3&gt;
+
+&lt;p&gt;コンポーネント単位でアクセシビリティを確保しやすくなる可能を持っている。&lt;br&gt;
+アクセシビリティの品質を維持・管理できる可能がある。&lt;br&gt;
+本質的にはWeb componentsを使わない場合と同じ。&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;2015年これからの日本のWebサイトパフォーマンスについて&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;竹洞 陽一郎&lt;/li&gt;
+&lt;li&gt;川田 寛: NTTコムウェア株式会社&lt;/li&gt;
+&lt;li&gt;Meco Meco&lt;/li&gt;
+&lt;li&gt;堀 裕司&lt;/li&gt;
+&lt;li&gt;山﨑 真吾&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="http://www.slideshare.net/takehora/html5-conference-43867874"&gt;HTML5 CONFERENCE パフォーマンス部パネルディスカッション 「2015年これからの日本のWebサイトパフォーマンスについて」&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;遅いと分かってからパフォーマンス改善すると、とても工数が掛かってしまい非効率。初めからパフォーマンスを意識して制作したほうが良い。&lt;/p&gt;
+
+&lt;h3&gt;日本のWebパフォーマンスの現状&lt;/h3&gt;
+
+&lt;p&gt;アメリカは1秒ほどでサイトが表示されるが、日本のサイトは7秒とかかかっている。
+いろいろパフォーマンス改善できるツール(圧縮や結合など)が登場しているが、受託の場合運用などの問題で活用できていない。&lt;/p&gt;
+
+&lt;h3&gt;パフォーマンス管理&lt;/h3&gt;
+
+&lt;p&gt;パフォーマンスの計測は最低でも1週間はとる。&lt;br&gt;
+時間帯も気にする。昼よりも夜のほうがアクセスが集中するため、&lt;strong&gt;昼だけでなく夜のパフォーマンスも確認する。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3&gt;今の高速化手法&lt;/h3&gt;
+
+&lt;p&gt;ビジネスアプローチと技術的アプローチの双方が必要。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;イメージファイルの最適化&lt;/li&gt;
+&lt;li&gt;javascriptとCSSの最適化
+
+&lt;ul&gt;
+&lt;li&gt;concat + uglify&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ネットワークの最適化
+
+&lt;ul&gt;
+&lt;li&gt;HTTPリクエストを減らす&lt;/li&gt;
+&lt;li&gt;CSSスプライト&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;マルチバイトとWebフォント
+
+&lt;ul&gt;
+&lt;li&gt;日本語の場合は重いので微妙&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;レイアウトのデザイン
+
+&lt;ul&gt;
+&lt;li&gt;アメリカでは画像が減ってきている&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;モバイル向けWeb&lt;/li&gt;
+&lt;li&gt;アニメーション&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;まとめ&lt;/h3&gt;
+
+&lt;p&gt;とにかく通信料を減らすことがパフォーマンスに繋がる。&lt;br&gt;
+CSSスプライトもやりすぎない。適度にファイルを分割する。&lt;br&gt;
+画像を減らせるか、本当に必要な機能なのかをクライアントと話し合う。&lt;br&gt;
+&lt;strong&gt;PCは1MB、モバイルは100KB&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;【ハンズオン】やってみたら実は簡単！ WebGLで開ける新しい表現&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小山田 晃浩: 株式会社ピクセルグリッド&lt;/li&gt;
+&lt;li&gt;比留間 和也: 面白法人カヤック&lt;/li&gt;
+&lt;li&gt;杉本 雅広&lt;/li&gt;
+&lt;li&gt;原田 直貴: 株式会社Gaji-Labo&lt;/li&gt;
+&lt;li&gt;執行 大介&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="https://speakerdeck.com/yomotsu/webgl-plus-3d-models-by-using-three-dot-js-blender-exporter"&gt;WebGL + 3D models by using Three.js Blender Exporter&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;THREE.JSハンズオン&lt;/h3&gt;
+
+&lt;p&gt;映画では要なものをTHREE.JSで考える。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;役者 → オブジェクト&lt;/li&gt;
+&lt;li&gt;カメラ → カメラ&lt;/li&gt;
+&lt;li&gt;ライト → ライト&lt;/li&gt;
+&lt;li&gt;シーン → シーン&lt;/li&gt;
+&lt;li&gt;再生機 → 再生機&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;初期設定&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="c1"&gt;// レンダラーを生成
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;renderer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;WebGLRenderer&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="nx"&gt;renderer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setClearColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x000000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;renderer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setSize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;innerWidth&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;innerHeight&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;カメラの生成&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;PerspectiveCamera&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;角度&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;アスペクト比&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;手前&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;奥行き&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nx"&gt;camera&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;position&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;camera&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;position&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;ライトの設定&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="c1"&gt;// 平行光源
+&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;DirectionalLight&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0xffffff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;シーンの生成&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Scene&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;オブジェクトの生成&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="c1"&gt;// 形
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;planeGeometry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;PlaneBufferGeometry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;縦横&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;分割数&lt;/span&gt;&lt;span class="p"&gt;.....);&lt;/span&gt;
+
+&lt;span class="c1"&gt;// 材質
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;planeMaterial&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MeshLambertMaterial&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;0xdddddd&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="c1"&gt;// 生成
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;plane&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Mesh&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;planeGeometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;planeMaterial&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="nx"&gt;plane&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;position&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;plane&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rotation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;PI&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;キューブの生成&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="c1"&gt;// 形
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;boxGeometry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;BoxGeometry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="c1"&gt;// 材質
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;boxMaterial&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MeshLambertMaterial&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;cubeColor&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="c1"&gt;// 生成
+&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;cube&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;THREE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Mesh&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;boxGeometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;boxMaterial&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;シーンに追加&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;plane&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cube&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;scene&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;light&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;カメラの向き&lt;/h3&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="nx"&gt;camera&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;lookAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;cube&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;position&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h2&gt;アニメーション&lt;/h2&gt;
+&lt;pre class="highlight javascript"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;animate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;requestAnimationFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;animate&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="nx"&gt;cube&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rotation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nx"&gt;cube&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rotation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mf"&gt;0.005&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}());&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;THREE.JSとBlender&lt;/h3&gt;
+
+&lt;p&gt;3Dモデルを作成したことがなくても、以外と緩いライセンスで色々な3Dモデルデータが配布されている。&lt;/p&gt;
+
+&lt;p&gt;3DモデルデータをWebGL用にコンパイルするためには、exporterを使う。&lt;/p&gt;
+
+&lt;h3&gt;BlenderでTHREE.JSを使えるようにする&lt;/h3&gt;
+
+&lt;p&gt;THREE.JSのAddonをBlender内のAddonにコピーします。&lt;br&gt;
+THREE.JSのAddonは、&lt;code&gt;three.js/utils/exporters/blender&lt;/code&gt;にあります。(io mesh threejsのような名前)&lt;/p&gt;
+
+&lt;p&gt;BlenderのAddonは&lt;code&gt;アプリケーション/Blender.app/Contents/Resources/2.73/scripts/addons&lt;/code&gt;にあるので、THREE.JSのAddonをコピーします。&lt;/p&gt;
+
+&lt;p&gt;次にBlenderを開いて&lt;code&gt;file/user Preferences&lt;/code&gt;を開く。&lt;br&gt;
+Addonタブ内のfilderで&lt;code&gt;three&lt;/code&gt;で検索する。&lt;br&gt;
+three.js formatg表示されるので、チェックを入れてSave User Settingsで保存する。これでBlenderでTHREE.JSが有効化される。&lt;/p&gt;
+</content>
+  </entry>
+</feed>
